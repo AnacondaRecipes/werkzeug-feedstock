@@ -39,6 +39,7 @@ about:
     Werkzeug is a WSGI utility library for Python. It's widely used and BSD licensed.
   doc_url: http://werkzeug.pocoo.org/docs
   dev_url: https://github.com/pallets/werkzeug
+  doc_source_url: https://github.com/pallets/werkzeug/tree/master/docs
 
 extra:
   recipe-maintainers:
