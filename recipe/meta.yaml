@@ -1,5 +1,5 @@
 {% set name = "Werkzeug" %}
-{% set version = "2.0.2" %}
+{% set version = "2.0.3" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,9 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: aa2bb6fc8dee8d6c504c0ac1e7f5f7dc5810a9903e793b6f715a9f015bdadb9a
+  sha256: b863f8ff057c522164b6067c9e28b041161b4be5ba4d0daceeaa50a163822d3c
 
 build:
-  skip: True  # [py<36]
   noarch: python
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps -vv
@@ -28,7 +27,6 @@ requirements:
 test:
   requires:
     - pip
-    - python <3.10
   imports:
     - werkzeug
     - werkzeug.debug
