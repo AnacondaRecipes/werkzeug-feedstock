@@ -38,12 +38,10 @@ about:
   license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE.rst
-  license_url: https://github.com/pallets/werkzeug/blob/2.2.2/LICENSE.rst
   summary: The comprehensive WSGI web application library.
   description: |
     Werkzeug is a WSGI utility library for Python. It's widely used and BSD licensed.
   doc_url: https://werkzeug.palletsprojects.com/
-  doc_source_url: https://github.com/pallets/werkzeug/tree/{{ version }}/docs
   dev_url: https://github.com/pallets/werkzeug
 
 extra:
