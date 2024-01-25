@@ -1,28 +1,29 @@
 {% set name = "Werkzeug" %}
-{% set version = "2.2.3" %}
+{% set version = "2.3.8" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 2e1ccc9417d4da358b9de6f174e3ac094391ea1d4fbef2d667865d819dfd0afe
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name|lower }}-{{ version }}.tar.gz
+  sha256: 554b257c74bbeb7a0d254160a4f8ffe185243f52a52035060b761ca62d977f03
 
 build:
-  skip: True  # [py<37]
+  skip: True  # [py<38]
   number: 0
-  script: {{ PYTHON }} -m pip install . --no-deps -vv
+  script: {{ PYTHON }} -m pip install . --no-deps -v --no-build-isolation
 
 requirements:
   host:
     - python
     - pip
-    - setuptools
-    - wheel
+    - flit-core <4
   run:
     - python
     - MarkupSafe >=2.1.1
+  run_constrained:
+    - watchdog >=2.3
 
 test:
   requires:
