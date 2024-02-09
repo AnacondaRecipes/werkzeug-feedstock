@@ -46,6 +46,10 @@ about:
   dev_url: https://github.com/pallets/werkzeug
 
 extra:
+  anaconda-services:
+    ref: https://anaconda.zendesk.com/agent/tickets/44803
+    reason: Client request
   recipe-maintainers:
+    - ianaobi
     - goanpeca
     - mcs07
