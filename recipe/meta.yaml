@@ -1,5 +1,5 @@
 {% set name = "Werkzeug" %}
-{% set version = "2.3.8" %}
+{% set version = "3.0.3" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name|lower }}-{{ version }}.tar.gz
-  sha256: 554b257c74bbeb7a0d254160a4f8ffe185243f52a52035060b761ca62d977f03
+  sha256: 097e5bfda9f0aba8da6b8545146def481d06aa7d3266e7448e2cccf67dd8bd18
 
 build:
   skip: True  # [py<38]
   number: 0
-  script: {{ PYTHON }} -m pip install . --no-deps -v --no-build-isolation
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -v
 
 requirements:
   host:
@@ -21,24 +21,36 @@ requirements:
     - flit-core <4
   run:
     - python
-    - MarkupSafe >=2.1.1
+    - markupsafe >=2.1.1
   run_constrained:
     - watchdog >=2.3
 
 test:
-  requires:
-    - pip
   imports:
     - werkzeug
     - werkzeug.debug
+  source_files:
+    - tests
+    - pyproject.toml
+  requires:
+    - cryptography
+    - greenlet
+    - pip
+    - pytest
+    - pytest-timeout
+    - types-setuptools
   commands:
     - pip check
+    - pip install ephemeral_port_reserve pytest-xprocess
+    # Skip 'test_basic' and 'test_http_proxy' because of ConnectionRefusedError.
+    # Skip 'test_serving.py' because of watchdog's version >=2.3 isn't available
+    - pytest -vv -k "not (exclude_patterns or test_basic or test_http_proxy)" --ignore=tests/test_serving.py
 
 about:
   home: https://palletsprojects.com/p/werkzeug/
   license: BSD-3-Clause
   license_family: BSD
-  license_file: LICENSE.rst
+  license_file: LICENSE.txt
   summary: The comprehensive WSGI web application library.
   description: |
     Werkzeug is a WSGI utility library for Python. It's widely used and BSD licensed.
