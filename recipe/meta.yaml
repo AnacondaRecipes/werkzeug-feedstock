@@ -45,7 +45,7 @@ test:
     - pip check
     - pip install ephemeral_port_reserve pytest-xprocess
     # Skip 'test_basic' and 'test_http_proxy' because of ConnectionRefusedError.
-    # Skip 'test_serving.py' because of watchdog's version >=2.3 isn't available
+    # Skip 'test_serving.py' because watchdog >=2.3 isn't available
     - pytest -vv -k "not (exclude_patterns or test_basic or test_http_proxy)" --ignore=tests/test_serving.py
 
 about:
