@@ -39,6 +39,8 @@ test:
     - pytest
     - pytest-timeout
     - types-setuptools
+    # for pytest-xprocess
+    - psutil  # [linux and (aarch64 or s390x)]
   commands:
     - pip check
     - pip install ephemeral_port_reserve pytest-xprocess
