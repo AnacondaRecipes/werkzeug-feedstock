@@ -1,13 +1,13 @@
-{% set name = "Werkzeug" %}
-{% set version = "3.1.6" %}
+{% set name = "werkzeug" %}
+{% set version = "3.1.9" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name|lower }}-{{ version }}.tar.gz
-  sha256: 210c6bede5a420a913956b4791a7f4d6843a43b6fcee4dfa08a65e93007d0d25
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 55ca7c70a75689be937aa27f8ff4b018f06ff4838fc73045560bf0f5a1291060
 
 build:
   number: 0
@@ -18,7 +18,7 @@ requirements:
   host:
     - python
     - pip
-    - flit-core <4
+    - flit-core >=3.11,<5
   run:
     - python
     - markupsafe >=2.1.1
@@ -33,18 +33,22 @@ test:
     - pip
   commands:
     - pip check
-    # 'pytest' fails immediately because packages 'ephemeral_port_reserve' and 'pytest-xprocess' are not available on defaults.
-    # Additionally, 'pytest-xprocess' requires 'psutil' on linux-aarch64 and linux-s390x
+    # No pytest run: tests/conftest.py imports ephemeral_port_reserve at top level
+    # (whole suite fails to collect without it), and ephemeral-port-reserve is not
+    # on pkgs/main.
 
 about:
-  home: https://palletsprojects.com/p/werkzeug/
-  license: BSD-3-Clause
-  license_family: BSD
-  license_file: LICENSE.txt
+  home: https://palletsprojects.com/p/werkzeug
+  license: BSD-3-Clause AND (CC-BY-2.5 OR CC-BY-3.0)
+  license_family: Other
+  license_file:
+    - LICENSE.txt
+    # debugger toolbar ships the Silk icon set under CC-BY
+    - src/werkzeug/debug/shared/ICON_LICENSE.md
   summary: The comprehensive WSGI web application library.
   description: |
     Werkzeug is a WSGI utility library for Python. It's widely used and BSD licensed.
-  doc_url: https://werkzeug.palletsprojects.com/
+  doc_url: https://werkzeug.palletsprojects.com
   dev_url: https://github.com/pallets/werkzeug
 
 extra:
